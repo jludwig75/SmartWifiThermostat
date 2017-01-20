@@ -31,7 +31,7 @@ private:
 		SensorNode *next;
 	};
 
-	void climatize_zones();
+	void climatize_zone();
 
 	uint32_t _id;
 	char *_name;

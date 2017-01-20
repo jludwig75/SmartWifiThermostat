@@ -77,7 +77,7 @@ const char *Zone::get_name() const
 	return _name;
 }
 
-void Zone::climatize_zones()
+void Zone::climatize_zone()
 {
 	unsigned sensors_requesting_heat = 0;
 	unsigned sensors_requesting_cool = 0;
@@ -93,17 +93,20 @@ void Zone::climatize_zones()
 		Sensor *sensor = node->sensor;
 		total_sensors++;
 
-		if (sensor->get_temperature() < _heat_point)
+		float temperature = sensor->get_temperature();
+		float humidity = sensor->get_humidity();
+
+		if (temperature < _heat_point)
 		{
 			sensors_requesting_heat++;
 		}
 
-		if (sensor->get_temperature() > _cool_point)
+		if (temperature > _cool_point)
 		{
 			sensors_requesting_cool++;
 		}
 
-		if (sensor->get_humidity() < _humidity_point)
+		if (humidity < _humidity_point)
 		{
 			sensors_requesting_humidity++;
 		}
@@ -163,24 +166,24 @@ void Zone::climatize_zones()
 
 void Zone::notify_sensor_conditions_changed()
 {
-	climatize_zones();
+	climatize_zone();
 }
 
 void Zone::set_cool_set_point(float temperature)
 {
 	_cool_point = temperature;
-	climatize_zones();
+	climatize_zone();
 }
 
 void Zone::set_heat_set_point(float temperature)
 {
 	_heat_point = temperature;
-	climatize_zones();
+	climatize_zone();
 }
 
 void Zone::set_humidity_set_point(float humidity)
 {
 	_humidity_point = humidity;
-	climatize_zones();
+	climatize_zone();
 }
 
