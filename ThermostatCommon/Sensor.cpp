@@ -74,7 +74,7 @@ void Sensor::update_temperature(float temperature)
 
 	_temperature = temperature;
 
-	if (notify)
+	if (notify && _zone != NULL)
 	{
 		_zone->notify_sensor_conditions_changed();
 	}
@@ -86,7 +86,7 @@ void Sensor::update_humidity(float humidity)
 
 	_humidity = humidity;
 
-	if (notify)
+	if (notify && _zone != NULL)
 	{
 		_zone->notify_sensor_conditions_changed();
 	}

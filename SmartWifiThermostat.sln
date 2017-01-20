@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Thermostat_unittest", "Ther
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Thermostat_integrationtest", "Thermostat_integrationtest\Thermostat_integrationtest.vcxproj", "{8967FC40-45BC-424B-92A5-0B9470A0C19A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sensor_unittest", "Sensor_unittest\Sensor_unittest.vcxproj", "{D47198C0-1875-4EF5-B579-1C09EF5062F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -59,6 +61,14 @@ Global
 		{8967FC40-45BC-424B-92A5-0B9470A0C19A}.Release|x64.Build.0 = Release|x64
 		{8967FC40-45BC-424B-92A5-0B9470A0C19A}.Release|x86.ActiveCfg = Release|Win32
 		{8967FC40-45BC-424B-92A5-0B9470A0C19A}.Release|x86.Build.0 = Release|Win32
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Debug|x64.ActiveCfg = Debug|x64
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Debug|x64.Build.0 = Debug|x64
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Debug|x86.ActiveCfg = Debug|Win32
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Debug|x86.Build.0 = Debug|Win32
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Release|x64.ActiveCfg = Release|x64
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Release|x64.Build.0 = Release|x64
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Release|x86.ActiveCfg = Release|Win32
+		{D47198C0-1875-4EF5-B579-1C09EF5062F6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
