@@ -88,7 +88,7 @@ void ClimateControlCoordinator::request_humidity(Zone *zone)
 	climatize_zones();
 }
 
-void ClimateControlCoordinator::cancel_humidity_request(Zone *zone)
+void ClimateControlCoordinator::request_no_humidity(Zone *zone)
 {
 	ZoneNode *node = get_node_for_zone(zone);
 	assert(node != NULL);

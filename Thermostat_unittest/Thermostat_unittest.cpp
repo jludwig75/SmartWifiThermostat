@@ -31,7 +31,7 @@ void ClimateControlCoordinator::request_humidity(Zone *zone)
 
 }
 
-void ClimateControlCoordinator::cancel_humidity_request(Zone *zone)
+void ClimateControlCoordinator::request_no_humidity(Zone *zone)
 {
 
 }

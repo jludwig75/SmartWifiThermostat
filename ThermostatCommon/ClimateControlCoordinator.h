@@ -19,7 +19,7 @@ public:
 	void request_mode(Zone *zone, ClimateControlEquipment::Mode mode);
 
 	void request_humidity(Zone *zone);
-	void cancel_humidity_request(Zone *zone);
+	void request_no_humidity(Zone *zone);
 
 private:
 	struct ZoneNode

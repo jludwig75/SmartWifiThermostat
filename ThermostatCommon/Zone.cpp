@@ -88,6 +88,7 @@ void Zone::climatize_zone()
 
 	ClimateControlEquipment::Mode request_mode = ClimateControlEquipment::off;
 
+	// Poll the sensors
 	while (node)
 	{
 		Sensor *sensor = node->sensor;
@@ -114,14 +115,14 @@ void Zone::climatize_zone()
 		node = node->next;
 	}
 
+	// Determine mode
 	if (sensors_requesting_heat > sensors_requesting_cool)
 	{
 		request_mode = ClimateControlEquipment::heat;
-		_coordinator->request_mode(this, request_mode);
 	}
-	else if (sensors_requesting_cool > sensors_requesting_heat) {
+	else if (sensors_requesting_cool > sensors_requesting_heat)
+	{
 		request_mode = ClimateControlEquipment::cool;
-		_coordinator->request_mode(this, request_mode);
 	}
 	else if (sensors_requesting_cool > 0)
 	{
@@ -131,36 +132,39 @@ void Zone::climatize_zone()
 		// It's a tie between the sensors requesting heat and the sensors requestion cool.
 		// This means we need to circulate the air.
 		request_mode = ClimateControlEquipment::fan_only;
-		_coordinator->request_mode(this, request_mode);
 	}
 	else
 	{
-		// Optimization so we don't turn around and
-		// request the fan again for the humidity below.
-		if (0 == sensors_requesting_humidity)
+		request_mode = ClimateControlEquipment::off;
+	}
+
+	// Determine humidity
+	bool request_humidity = false;
+	if (sensors_requesting_humidity > 0)
+	{
+		// At least one sensor wants humidity, but not all.
+		// This means we need to at least circulate the air.
+		if (ClimateControlEquipment::off == request_mode)
 		{
-			request_mode = ClimateControlEquipment::off;
-			_coordinator->request_mode(this, request_mode);
+			request_mode = ClimateControlEquipment::fan_only;
+		}
+
+		// Only turn on the humidifier if humidity is needed
+		if (sensors_requesting_humidity > total_sensors / 2)
+		{
+			request_humidity = true;
 		}
 	}
 
-	if (sensors_requesting_humidity > total_sensors / 2)
+	// Request modes.
+	_coordinator->request_mode(this, request_mode);
+	if (request_humidity)
 	{
 		_coordinator->request_humidity(this);
 	}
 	else
 	{
-		if (sensors_requesting_humidity > 0)
-		{
-			// At least one sensor wants humidity, but not all.
-			// This means we need to circulate the air.
-
-			if (ClimateControlEquipment::off == request_mode)
-			{
-				request_mode = ClimateControlEquipment::fan_only;
-				_coordinator->request_mode(this, request_mode);
-			}
-		}
+		_coordinator->request_no_humidity(this);
 	}
 }
 
